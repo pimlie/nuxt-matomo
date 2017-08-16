@@ -3,20 +3,22 @@ const path = require('path')
 module.exports = function nuxtPiwik (options) {
   // Don't include on dev mode
   if (this.options.dev && process.env.NODE_ENV !== 'production') {
-    // return
+    return
   }
 
-  /* / Add piwik script to head
-  let config_js = '_paq.push(["setTrackerUrl", "' + (options.trackerUrl || options.piwikUrl+'piwik.php') + '"]);'
-  config_js += '_paq.push(["setSiteId", "' + options.siteId + '"])'
+  // Add piwik script to head
+  let config_js = "_paq.push(['setTrackerUrl', '" + (options.trackerUrl || options.piwikUrl+'piwik.php') + "']);"
+  config_js += "_paq.push(['setSiteId', '" + options.siteId + "'])"
+
+  this.options.head.__dangerouslyDisableSanitizers = ['script']
   this.options.head.script.push({ 
-    innerHTML: config_js, type: 'application/ld+json'
+    hid: 'blabla', innerHTML: config_js, type: 'application/ld+json'
   })
   this.options.head.script.push({
     src: options.scriptUrl || options.piwikUrl+'piwik.js',
     async: true,
     defer: true
-  })/**/
+  })
 
   // Register plugin
   this.addPlugin({src: path.resolve(__dirname, 'plugin.js'), ssr: false, options})
