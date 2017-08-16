@@ -5,14 +5,21 @@ export default ({ app: { router, store } }) => {
   let loc = window.location
   // Every time the route changes (fired on initialization too)
   router.afterEach((to, from) => {
-    // Set page settings
+    // Set default page settings
+    // We dont know the to's page title in vue-router.afterEach, DOM is updated _after_ afterEach
+    // see: https://router.vuejs.org/en/advanced/navigation-guards.html
+    // use path as default value
+    window['_paq'].push(['setDocumentTitle', to.path])
+    window['_paq'].push(['setCustomUrl', loc.protocol + '//' + loc.hostname + to.fullPath])
+
+    // Allow override page settings
     const settings = Object.assign({}, routeOption('piwik', from, to, store), to.meta && to.meta.piwik)
     Object.keys(settings).forEach(key => {
       window['_paq'].push(settings[key])
     })
 
     // We tell Piwik to add a page view
-    window['_paq'].push(['trackLink', loc.protocol + '//' + loc.hostname + to.fullPath, 'link'])
+    window['_paq'].push(['trackPageView'])
   })
 }
 
