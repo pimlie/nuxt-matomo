@@ -12,7 +12,7 @@ module.exports = function nuxtPiwik (options) {
 
   this.options.head.__dangerouslyDisableSanitizers = ['script']
   this.options.head.script.push({ 
-    hid: 'blabla', innerHTML: config_js, type: 'application/ld+json'
+    innerHTML: config_js, type: 'text/javascript'
   })
   this.options.head.script.push({
     src: options.scriptUrl || options.piwikUrl+'piwik.js',
