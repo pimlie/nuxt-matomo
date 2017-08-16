@@ -1,6 +1,6 @@
 {
   "name": "nuxt-piwik",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "license": "MIT",
   "description": "nuxt module for piwik analytics",
   "repository": "https://github.com/pimlie/nuxt-piwik",
