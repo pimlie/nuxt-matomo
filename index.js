@@ -8,7 +8,7 @@ module.exports = function nuxtPiwik (options) {
 
   // Add piwik script to head
   let config_js = "window['_paq'] = [];";
-  condig_js += "window['_paq'].push(['setTrackerUrl', '" + (options.trackerUrl || options.piwikUrl+'piwik.php') + "']);"
+  config_js += "window['_paq'].push(['setTrackerUrl', '" + (options.trackerUrl || options.piwikUrl+'piwik.php') + "']);"
   config_js += "window['_paq'].push(['setSiteId', '" + options.siteId + "']);"
 
   this.options.head.__dangerouslyDisableSanitizers = ['script']
