@@ -9,7 +9,7 @@ This plugins automatically sends first page and route change events to piwik
 You can set environment variable `NODE_ENV` to `production` for testing in dev mode. 
 
 ## Setup
-- Add `nuxt-piwik` dependency using yarn or npm to your project
+- Install with npm `npm install --save nuxt-piwik` or use yarn
 - Add `nuxt-piwik` to `modules` section of `nuxt.config.js`
 ```js
   modules: [
