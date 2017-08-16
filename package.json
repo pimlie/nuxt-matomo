@@ -1,0 +1,26 @@
+{
+  "name": "nuxt-piwik",
+  "version": "0.1.0",
+  "license": "MIT",
+  "description": "nuxt module for piwik analytics",
+  "repository": "https://github.com/pimlie/nuxt-piwik",
+  "homepage": "https://github.com/pimlie/nuxt-piwik",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint --ext .js,.vue .",
+    "lint-fix": "eslint --ext .js,.vue --fix"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "babel-eslint": "^7.2.3",
+    "eslint": "^4.1.1",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-html": "^3.0.0",
+    "eslint-plugin-import": "^2.6.1",
+    "eslint-plugin-node": "^5.1.0",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^3.0.1"
+  }
+}
