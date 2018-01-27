@@ -11,9 +11,14 @@ module.exports = function nuxtPiwik (options) {
   config_js += "window['_paq'].push(['setTrackerUrl', '" + (options.trackerUrl || options.piwikUrl+'piwik.php') + "']);"
   config_js += "window['_paq'].push(['setSiteId', '" + options.siteId + "']);"
 
-  this.options.head.__dangerouslyDisableSanitizers = ['script']
-  this.options.head.script.push({ 
-    innerHTML: config_js, type: 'text/javascript'
+  if (typeof(this.options.head.__dangerouslyDisableSanitizersByTagID) === 'undefined') {
+    this.options.head.__dangerouslyDisableSanitizersByTagID = {}
+  }
+  this.options.head.__dangerouslyDisableSanitizersByTagID['nuxt-piwik-js'] = ['innerHTML']
+  this.options.head.script.push({
+    hid: 'nuxt-piwik-js',
+    innerHTML: config_js,
+    type: 'text/javascript'
   })
   this.options.head.script.push({
     src: options.scriptUrl || options.piwikUrl+'piwik.js',
