@@ -1,19 +1,19 @@
-# Piwik for NUXT
-[![npm](https://img.shields.io/npm/dt/nuxt-piwik.svg?style=flat-square)](https://www.npmjs.com/package/nuxt-piwik)
-[![npm (scoped with tag)](https://img.shields.io/npm/v/nuxt-piwik/latest.svg?style=flat-square)](https://www.npmjs.com/package/nuxt-piwik)
+# Matomo for NUXT
+[![npm](https://img.shields.io/npm/dt/nuxt-matomo.svg?style=flat-square)](https://www.npmjs.com/package/nuxt-matomo)
+[![npm (scoped with tag)](https://img.shields.io/npm/v/nuxt-matomo/latest.svg?style=flat-square)](https://www.npmjs.com/package/nuxt-matomo)
 
-> Add Piwik to your nuxt.js application.
-This plugins automatically sends first page and route change events to piwik
+> Add Matomo to your nuxt.js application.
+This plugins automatically sends first page and route change events to matomo
 
-**Note:** piwik is not enabled in `dev` mode.
+**Note:** matomo is not enabled in `dev` mode.
 You can set environment variable `NODE_ENV` to `production` for testing in dev mode. 
 
 ## Setup
-- Install with npm `npm install --save nuxt-piwik` or use yarn
-- Add `nuxt-piwik` to `modules` section of `nuxt.config.js`
+- Install with npm `npm install --save nuxt-matomo` or use yarn
+- Add `nuxt-matomo` to `modules` section of `nuxt.config.js`
 ```js
   modules: [
-    ['nuxt-piwik', { piwikUrl: '//piwik.example.com/', siteId: 1 }],
+    ['nuxt-matomo', { matomoUrl: '//matomo.example.com/', siteId: 1 }],
   ]
 ````
 
@@ -22,27 +22,27 @@ You can set environment variable `NODE_ENV` to `production` for testing in dev m
 ### `siteId`
 - Required
 
-### `piwikUrl`
+### `matomoUrl`
 
-Url to piwik installation
+Url to matomo installation
 
 ### `trackerUrl`
 
-Url to piwik.php, default is `piwikUrl + 'piwik.php'`
+Url to matomo.php, default is `matomoUrl + 'matomo.php'`
 
 ### `scriptUrl`
 
-Url to piwik.js, default is `piwikUrl + 'piwik.js'`
+Url to matomo.js, default is `matomoUrl + 'matomo.js'`
 
 ### Setting configuration at runtime
-You can push any additional tracking info to `_paq` at runtime by adding a piwik 
-object ```route.meta.piwik`` in the middleware or to the selected pages. An object
+You can push any additional tracking info to `_paq` at runtime by adding a matomo 
+object ```route.meta.matomo`` in the middleware or to the selected pages. An object
 is used so we can override middleware variables for selected pages
 
 Middleware example:
 ```javascript
 export default function ({ route, store }) {
-  route.meta.piwik = {
+  route.meta.matomo = {
     documentTitle: ['setDocumentTitle', 'Some other title'],
     userId: ['setUserId', store.state.userId],
     someVar: ['setCustomVariable', 1, 'VisitorType', 'Member']
@@ -62,7 +62,7 @@ export default function ({ route, store }) {
 <script>
   export default {
 
-    piwik (from, to, store) {
+    matomo (from, to, store) {
       return {
         someVar: ['setCustomVariable', 1, 'VisitorType', 'Special Member']
       }

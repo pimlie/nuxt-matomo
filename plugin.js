@@ -1,4 +1,4 @@
-// Setup piwik
+// Setup matomo
 window['_paq'] = window['_paq'] || []
 
 export default ({ app: { router, store } }) => {
@@ -13,12 +13,12 @@ export default ({ app: { router, store } }) => {
     window['_paq'].push(['setCustomUrl', loc.protocol + '//' + loc.hostname + to.fullPath])
 
     // Allow override page settings
-    const settings = Object.assign({}, routeOption('piwik', from, to, store), to.meta && to.meta.piwik)
+    const settings = Object.assign({}, routeOption('matomo', from, to, store), to.meta && to.meta.matomo)
     Object.keys(settings).forEach(key => {
       window['_paq'].push(settings[key])
     })
 
-    // We tell Piwik to add a page view
+    // We tell Matomo to add a page view
     window['_paq'].push(['trackPageView'])
   })
 }

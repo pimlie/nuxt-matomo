@@ -1,10 +1,10 @@
 {
-  "name": "nuxt-piwik",
+  "name": "nuxt-matomo",
   "version": "0.3.0",
   "license": "MIT",
-  "description": "nuxt module for piwik analytics",
-  "repository": "https://github.com/pimlie/nuxt-piwik",
-  "homepage": "https://github.com/pimlie/nuxt-piwik",
+  "description": "nuxt module for matomo analytics",
+  "repository": "https://github.com/pimlie/nuxt-matomo",
+  "homepage": "https://github.com/pimlie/nuxt-matomo",
   "main": "index.js",
   "scripts": {
     "lint": "eslint --ext .js,.vue .",
