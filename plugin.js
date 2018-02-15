@@ -13,7 +13,13 @@ export default ({ app: { router, store } }) => {
     window['_paq'].push(['setCustomUrl', loc.protocol + '//' + loc.hostname + to.fullPath])
 
     // Allow override page settings
-    const settings = Object.assign({}, routeOption('matomo', from, to, store), to.meta && to.meta.matomo)
+    const settings = Object.assign(
+      {},
+      routeOption('matomo', from, to, store),
+      routeOption('piwik', from, to, store),
+      to.meta && to.meta.matomo,
+      to.meta && to.meta.piwik
+    )
     Object.keys(settings).forEach(key => {
       window['_paq'].push(settings[key])
     })

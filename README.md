@@ -1,4 +1,4 @@
-# Matomo for NUXT
+# Matomo (previously Piwik) for Nuxt.js
 [![npm](https://img.shields.io/npm/dt/nuxt-matomo.svg?style=flat-square)](https://www.npmjs.com/package/nuxt-matomo)
 [![npm (scoped with tag)](https://img.shields.io/npm/v/nuxt-matomo/latest.svg?style=flat-square)](https://www.npmjs.com/package/nuxt-matomo)
 
@@ -28,15 +28,15 @@ Url to matomo installation
 
 ### `trackerUrl`
 
-Url to matomo.php, default is `matomoUrl + 'matomo.php'`
+Url to piwik.php, default is `matomoUrl + 'piwik.php'`
 
 ### `scriptUrl`
 
-Url to matomo.js, default is `matomoUrl + 'matomo.js'`
+Url to piwik.js, default is `matomoUrl + 'piwik.js'`
 
 ### Setting configuration at runtime
 You can push any additional tracking info to `_paq` at runtime by adding a matomo 
-object ```route.meta.matomo`` in the middleware or to the selected pages. An object
+object `route.meta.matomo` in the middleware or to the selected pages. An object
 is used so we can override middleware variables for selected pages
 
 Middleware example:
@@ -71,3 +71,7 @@ export default function ({ route, store }) {
   }
 </script>
 ``` 
+
+### Deprecation warning
+
+For the moment you can still use both `matomo` as `piwik` names for your middleware. The piwik name will be removed in a future version.
