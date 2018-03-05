@@ -11,6 +11,10 @@ module.exports = function nuxtMatomo (options) {
   config_js += "window['_paq'].push(['setTrackerUrl', '" + (options.trackerUrl || (options.matomoUrl || options.piwikUrl)+'piwik.php') + "']);"
   config_js += "window['_paq'].push(['setSiteId', '" + options.siteId + "']);"
 
+  if (options.cookies === false) {
+    config_js += "window['_paq'].push(['disableCookies']);"
+  }
+
   if (typeof(this.options.head.__dangerouslyDisableSanitizersByTagID) === 'undefined') {
     this.options.head.__dangerouslyDisableSanitizersByTagID = {}
   }
