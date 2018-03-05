@@ -34,6 +34,11 @@ Url to piwik.php, default is `matomoUrl + 'piwik.php'`
 
 Url to piwik.js, default is `matomoUrl + 'piwik.js'`
 
+### `cookies`
+
+If false, Matomo will be configured to not create a tracking cookie  
+Default: `(unset)`
+
 ### Setting configuration at runtime
 You can push any additional tracking info to `_paq` at runtime by adding a matomo 
 object `route.meta.matomo` in the middleware or to the selected pages. An object
