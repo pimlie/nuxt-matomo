@@ -6,6 +6,10 @@
   "repository": "https://github.com/pimlie/nuxt-matomo",
   "homepage": "https://github.com/pimlie/nuxt-matomo",
   "main": "index.js",
+  "files": [
+    "index.js",
+    "plugin.js"
+  ],
   "scripts": {
     "lint": "eslint --ext .js,.vue .",
     "lint-fix": "eslint --ext .js,.vue --fix"
