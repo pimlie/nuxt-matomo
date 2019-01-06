@@ -38,7 +38,7 @@ export default function ({ route, store }) {
 
 ```
 
-##### Setting configuration at runtime for selected pages
+##### Page component example
 ```js
 <template>
   <div>
