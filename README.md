@@ -29,7 +29,7 @@ You can add additional tracking info by adding a `route.meta.matomo` object in a
 
 > The VueRouter afterEach guard which this plugin uses is called before your page component is created
 
-The matomo javascript tracker is also injected as `$matomo` in your Nuxt instance to e.g. manually track a page view. See the [injected](./test/fixture/pages/injected.vue) and [manuallytracked](./test/fixture/pages/manuallytracked.vue) pages in the test fixture for an example
+The matomo javascript tracker is also injected as `$matomo` in your Nuxt instance to e.g. manually track a page view. See the [injected](./test/fixture/pages/injected.vue) and [manually tracked](./test/fixture/pages/manuallytracked.vue) pages in the test fixture for an example
 
 ##### Middleware example
 ```js
@@ -133,3 +133,9 @@ If true, the plugin will log debug information to the console.
 
 - Default: `false`
 If true, the plugin will log every tracker function call to the console
+
+## Known issues
+
+This plugin uses a VueRouter afterEach guard to track navigation. Because the DOM is only updated after all afterEach guard's have been called (see the [VueRouter docs](https://router.vuejs.org/en/advanced/navigation-guards.html), we dont know the document.title for the new page. This plugin fallsback to setting the route.path as document title.
+
+If you really wish to track the document title, you can add a `beforeRouteEnter()` guard in your page components and pass a callback to the next method. See the [manually tracked](./test/fixture/pages/manuallytracked.vue) page for an example.
