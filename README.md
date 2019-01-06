@@ -18,69 +18,6 @@ Add Matomo tracking to your nuxt.js application. This plugin automatically sends
 
 ## Usage
 
-
-
-## Options
-
-#### `siteId` (required)
-
-The matomo siteId
-
-#### `matomoUrl`
-
-- Default: ``
-Url to matomo installation
-
-#### `trackerUrl`
-
-- Default: `matomoUrl + 'piwik.php'`
-Url to piwik.php
-
-#### `scriptUrl`
-
-- Default: `matomoUrl + 'piwik.js'`
-Url to piwik.js
-
-#### `cookies`
-
-- Default: `true`
-If false, Matomo will not create a tracking cookie
-
-#### `consentRequired`
-
-- Default: `false`
-If true, Matomo will not start tracking until the user has given consent
-
-#### `consentExpires`
-
-- Default: `0`
-If greater than 0 and when the `tracker.setConsent` method is called then we call `rememberConsentGiven(<consentExpires>)` instead of `setConsentGiven`. See below for more information
-
-#### `doNotTrack`
-
-- Default: `false`
-If true, dont track users who have set Mozilla's (proposed) Do Not Track setting
-
-#### `debug`
-
-- Default: `false`
-If true, the plugin will log debug information to the console. 
-
-> The plugin also logs debug information when Nuxt's debug option is set
-
-#### `verbose`
-
-- Default: `false`
-If true, the plugin will log every tracker function call to the console
-
-## Consent
-
-The plugin extends the matomo tracker with a `setConsent(<consentGiven>)` convenience method. 
-
-When `setConsent()` is called, the plugin will automatically call rememberConsentGiven when the module option consentExpires has been set. To forget consent you can pass false to this method.
-
-See the [default layout](./test/fixture/layouts/default.vue) in the test fixture for how to use this method in combination with a Vuex store.
-
 ### Setting configuration at runtime
 
 You can add additional tracking info by adding a `route.meta.matomo` object in a middleware and by adding a matomo object or function to your page component.
@@ -131,3 +68,64 @@ export default function ({ route, store }) {
   }
 </script>
 ```
+
+## Consent
+
+The plugin extends the matomo tracker with a `setConsent(<consentGiven>)` convenience method. 
+
+When `setConsent()` is called, the plugin will automatically call rememberConsentGiven when the module option consentExpires has been set. To forget consent you can pass false to this method.
+
+See the [default layout](./test/fixture/layouts/default.vue) in the test fixture for how to use this method in combination with a Vuex store.
+
+## Options
+
+#### `siteId` (required)
+
+The matomo siteId
+
+#### `matomoUrl`
+
+- Default: ` `
+Url to matomo installation
+
+#### `trackerUrl`
+
+- Default: `matomoUrl + 'piwik.php'`
+Url to piwik.php
+
+#### `scriptUrl`
+
+- Default: `matomoUrl + 'piwik.js'`
+Url to piwik.js
+
+#### `cookies`
+
+- Default: `true`
+If false, Matomo will not create a tracking cookie
+
+#### `consentRequired`
+
+- Default: `false`
+If true, Matomo will not start tracking until the user has given consent
+
+#### `consentExpires`
+
+- Default: `0`
+If greater than 0 and when the `tracker.setConsent` method is called then we call `rememberConsentGiven(<consentExpires>)` instead of `setConsentGiven`. See below for more information
+
+#### `doNotTrack`
+
+- Default: `false`
+If true, dont track users who have set Mozilla's (proposed) Do Not Track setting
+
+#### `debug`
+
+- Default: `false`
+If true, the plugin will log debug information to the console. 
+
+> The plugin also logs debug information when Nuxt's debug option is set
+
+#### `verbose`
+
+- Default: `false`
+If true, the plugin will log every tracker function call to the console
