@@ -1,0 +1,16 @@
+language: node_js
+node_js:
+  - "8"
+  - "10"
+  - "11"
+cache:
+  yarn: true
+  directories:
+    - node_modules
+install:
+  - yarn install
+script:
+  - yarn lint:lib
+  - yarn test:fixture
+  - yarn lint:matomo
+  - yarn test:e2e
