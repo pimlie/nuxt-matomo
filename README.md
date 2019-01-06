@@ -73,6 +73,36 @@ export default function ({ route, store }) {
 </script>
 ```
 
+##### Track manually (with document.title)
+```js
+<template>
+  <div>
+    <h1>manually tracked</h1>
+  </div>
+</template>
+
+<script>
+export default {
+  matomo: false,
+  head: {
+    title: 'manually tracked'
+  },
+  beforeRouteEnter(to, from, next) {
+    next((vm) => {
+      /**
+       * No need to call setDocumentTitle here if matomo: false has been set
+       * above. This callback is called after the DOM update and matomo already
+       * uses document.title by default. If matomo: false has not been set, you
+       * have to call setDocumentTitle here to override the
+       * setDocumentTitle call in the plugin
+       */
+      vm.$matomo.trackPageView()
+    })
+  }
+}
+</script>
+```
+
 ## Consent
 
 The plugin extends the matomo tracker with a `setConsent(<consentGiven>)` convenience method. 
@@ -138,4 +168,4 @@ If true, the plugin will log every tracker function call to the console
 
 This plugin uses a VueRouter afterEach guard to track navigation. Because the DOM is only updated after all afterEach guard's have been called (see the [VueRouter docs](https://router.vuejs.org/en/advanced/navigation-guards.html)), we dont know the document.title for the new page. This plugin fallsback to setting the route.path as document title.
 
-If you really wish to track the document title, you can add a `beforeRouteEnter()` guard in your page components and pass a callback to the next method. See the [manually tracked](./test/fixture/pages/manuallytracked.vue) page for an example.
+If you really wish to track the document title, you can add a `beforeRouteEnter()` guard in your page components and pass a callback to the next method. See above or the [manually tracked](./test/fixture/pages/manuallytracked.vue) page for an example.
