@@ -1,14 +1,19 @@
-# Matomo integration for Nuxt.js
+# Matomo analytics for Nuxt.js
 <a href="https://travis-ci.org/pimlie/nuxt-matomo"><img src="https://api.travis-ci.org/pimlie/nuxt-matomo.svg" alt="Build Status"></a>
 [![npm](https://img.shields.io/npm/dt/nuxt-matomo.svg?style=flat-square)](https://www.npmjs.com/package/nuxt-matomo)
 [![npm (scoped with tag)](https://img.shields.io/npm/v/nuxt-matomo/latest.svg?style=flat-square)](https://www.npmjs.com/package/nuxt-matomo)
 
-Add Matomo tracking to your nuxt.js application. This plugin automatically sends first page and route change events to matomo
-
-> nuxt-matomo is not enabled in `dev` mode unless you set the debug option
+Add Matomo analytics to your nuxt.js application. This plugin automatically sends first page and route change events to matomo
 
 ## Setup
-- Install with npm `npm install --save nuxt-matomo` or use yarn
+> nuxt-matomo is not enabled in `dev` mode unless you set the debug option
+
+- Install with 
+```
+npm install --save nuxt-matomo
+// or
+yarn add nuxt-matomo
+```
 - Add `nuxt-matomo` to `modules` section of `nuxt.config.js`
 ```js
   modules: [
@@ -76,7 +81,7 @@ When `setConsent()` is called, the plugin will automatically call rememberConsen
 
 See the [default layout](./test/fixture/layouts/default.vue) in the test fixture for how to use this method in combination with a Vuex store.
 
-## Options
+## Module Options
 
 #### `siteId` (required)
 
@@ -110,7 +115,7 @@ If true, Matomo will not start tracking until the user has given consent
 #### `consentExpires`
 
 - Default: `0`
-If greater than 0 and when the `tracker.setConsent` method is called then we call `rememberConsentGiven(<consentExpires>)` instead of `setConsentGiven`. See below for more information
+If greater than 0 and when the `tracker.setConsent` method is called then we call `rememberConsentGiven(<consentExpires>)` instead of `setConsentGiven`. See above for more information
 
 #### `doNotTrack`
 
