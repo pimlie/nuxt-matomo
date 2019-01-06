@@ -26,8 +26,7 @@ You can add additional tracking info by adding a `route.meta.matomo` object in a
 
 The matomo javascript tracker is also injected as `$matomo` in your Nuxt instance to e.g. manually track a page view. See the [injected](./test/fixture/pages/injected.vue) and [manuallytracked](./test/fixture/pages/manuallytracked.vue) pages in the test fixture for an example
 
-
-Middleware example:
+##### Middleware example
 ```js
 export default function ({ route, store }) {
   route.meta.matomo = {
@@ -39,7 +38,7 @@ export default function ({ route, store }) {
 
 ```
 
-### Setting configuration at runtime for selected pages
+##### Setting configuration at runtime for selected pages
 ```js
 <template>
   <div>
