@@ -1,6 +1,6 @@
 {
   "name": "nuxt-matomo",
-  "version": "0.5.1",
+  "version": "1.0.0",
   "license": "MIT",
   "description": "nuxt module for matomo analytics",
   "repository": "https://github.com/pimlie/nuxt-matomo",
