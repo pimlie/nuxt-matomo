@@ -37,6 +37,7 @@ describe('matomo analytics', () => {
 
   afterEach(() => {
     console.debug.mockClear()
+    console.warn.mockClear()
   })
 
   test('matomo is triggered on page load', async () => {
