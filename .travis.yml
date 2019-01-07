@@ -11,6 +11,6 @@ install:
   - yarn install
 script:
   - yarn lint:lib
-  - yarn test:fixture
+  - yarn test:fixtures
   - yarn lint:matomo
   - yarn test:e2e

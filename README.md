@@ -55,7 +55,7 @@ export default function ({ route, store }) {
 <script>
   export default {
     // the matomo function is bound to the Matomo tracker
-    // (this function is called before the page component is initiliazed)
+    // (this function is called before the page component is initialized)
     matomo (from, to, store) {
       this.setCustomVariable(1, 'VisitorType', 'Special Member')
     },
@@ -120,7 +120,7 @@ The plugin extends the matomo tracker with a `setConsent(<consentGiven>)` conven
 
 When `setConsent()` is called, the plugin will automatically call rememberConsentGiven when the module option consentExpires has been set. To forget consent you can pass false to this method.
 
-See the [default layout](./test/fixtures/basic/layouts/default.vue) in the test fixture for how to use this method in combination with a Vuex store.
+See the [basic fixture](./test/fixtures/basic) for an example how to use this method in combination with a Vuex store.
 
 ## Module Options
 
@@ -186,10 +186,12 @@ If true, the plugin will log every tracker function call to the console
 
 Nuxt.js uses vue-meta to asynchronously update the `document.title`, this means by default we dont know when the document.title is changed. Therefore the default behaviour for this plugin is to set the `route.path` as document title.
 
-If you set the module option `onMetaChange: true`, then this plugin will track page views on the first time some meta data is updated by vue-meta. This makes sure the document.title is available and updated, but if you have multiple pages without any meta data then those page views will probably not be tracked.
+If you set the module option `onMetaChange: true`, then this plugin will track page views on the first time some meta data is updated by vue-meta (after navigation). This makes sure the `document.title` is available and updated, but if you have multiple pages without any meta data then those page views will probably not be tracked.
 
-> vue-meta's changed event is only triggered when any meta data changed, make sure all your routes have a `head` option.
+> vue-meta's changed event is only triggered when any meta data changed, make sure all your routes have a [`head`](https://nuxtjs.org/api/pages-head) option.
 
-When debug is true, this plugin will show warnings in the console when it detects pages without a title or when no vue-meta changed event is triggered after navigation (timeout for this 500ms)
+When debug is true, this plugin will show warnings in the console when
+- it detects pages without a title 
+- when no vue-meta changed event is triggered within 500ms after navigation (tracking could still occur, the timeout only shows a warning)
 
 You can also use a combination of manual tracking and a vuex store to keep track of the document.title
