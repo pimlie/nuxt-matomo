@@ -18,8 +18,8 @@
     "lib"
   ],
   "scripts": {
-    "build": "nuxt build test/fixtures/meta-changed",
-    "dev": "nuxt test/fixtures/meta-changed",
+    "build": "nuxt build test/fixtures/basic",
+    "dev": "nuxt test/fixtures/basic",
     "download-matomo": "wget -O test/utils/piwik.js https://raw.githubusercontent.com/matomo-org/matomo/master/js/piwik.js",
     "lint": "yarn lint:lib && yarn lint:matomo",
     "lint:lib": "eslint --ext .js,.vue .",
