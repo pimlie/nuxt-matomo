@@ -10,15 +10,15 @@
     "lib"
   ],
   "scripts": {
-    "build": "nuxt build test/fixture",
-    "dev": "nuxt test/fixture",
-    "download-matomo": "wget -O test/fixture/static/piwik.js https://raw.githubusercontent.com/matomo-org/matomo/master/js/piwik.js",
+    "build": "nuxt build test/fixtures/meta-changed",
+    "dev": "nuxt test/fixtures/meta-changed",
+    "download-matomo": "wget -O test/utils/piwik.js https://raw.githubusercontent.com/matomo-org/matomo/master/js/piwik.js",
     "lint": "yarn lint:lib && yarn lint:matomo",
     "lint:lib": "eslint --ext .js,.vue .",
-    "lint:matomo": "if [ $(node -e \"console.log(require('fs').existsSync('./test/fixture/.nuxt/matomo'));\") = \"false\" ]; then yarn test:fixture; fi && eslint --no-ignore test/fixture/.nuxt/matomo/",
+    "lint:matomo": "if [ $(node -e \"console.log(require('fs').existsSync('./test/fixtures/basic/.nuxt/matomo'));\") = \"false\" ]; then yarn test:fixtures; fi && eslint --no-ignore test/fixtures/basic/.nuxt/matomo/",
     "release": "yarn lint && yarn test && standard-version",
-    "test": "yarn test:fixture && yarn test:e2e",
-    "test:fixture": "jest test/fixture",
+    "test": "yarn test:fixtures && yarn test:e2e",
+    "test:fixtures": "jest test/fixtures",
     "test:e2e": "jest test/e2e"
   },
   "publishConfig": {

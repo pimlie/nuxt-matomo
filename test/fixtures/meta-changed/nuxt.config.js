@@ -1,13 +1,11 @@
 module.exports = {
   rootDir: __dirname,
   dev: false,
-  router: {
-    middleware: 'matomo'
-  },
   modules: [
-    ['@/../../lib/module', {
+    ['@/../../../', {
+      onMetaChange: true,
       debug: true,
-      siteId: 1,
+      siteId: 2,
       matomoUrl: './'
     }]
   ]

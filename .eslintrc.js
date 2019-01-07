@@ -9,6 +9,6 @@ module.exports = {
   ],
   rules: {
     'vue/singleline-html-element-content-newline': 'off',
-    'no-console': ['error', { allow: ['debug'] }]
+    'no-console': ['error', { allow: ['debug', 'warn'] }]
   }
 }

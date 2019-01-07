@@ -25,11 +25,11 @@ yarn add nuxt-matomo
 
 ### Setting configuration at runtime
 
-You can add additional tracking info by adding a `route.meta.matomo` object in a middleware and by adding a matomo object or function to your page component.
+You can add additional tracking info by adding a `route.meta.matomo` object in a middleware or by adding a matomo function or object to your page components.
 
 > The VueRouter afterEach guard which this plugin uses is called before your page component is created
 
-The matomo javascript tracker is also injected as `$matomo` in your Nuxt instance to e.g. manually track a page view. See the [injected](./test/fixture/pages/injected.vue) and [manually tracked](./test/fixture/pages/manuallytracked.vue) pages in the test fixture for an example
+The matomo javascript tracker is also injected as `$matomo` in your Nuxt instance to e.g. manually track a page view. See the [injected](./test/fixtures/basic/pages/injected.vue) and [manually tracked](./test/fixtures/basic/pages/manuallytracked.vue) pages in the test fixture for an example
 
 ##### Middleware example
 ```js
@@ -54,12 +54,21 @@ export default function ({ route, store }) {
 
 <script>
   export default {
-    // the matomo function is binded to the tracker
+    // the matomo function is bound to the Matomo tracker
+    // (this function is called before the page component is initiliazed)
     matomo (from, to, store) {
       this.setCustomVariable(1, 'VisitorType', 'Special Member')
     },
+    // return false if you want to manually track here
+    matomo (from, to, store) {
+      this.setDocumentTitle('my title')
+      this.trackPageView()
+      return false
+    },
     // or let the function return an object
     matomo (from, to, store) {
+      // this object is merged with the object returned by a global middleware,
+      // use the object key to override properties from the middleware
       return {
         someVar: ['setCustomVariable', 1, 'VisitorType', 'Special Member']
       }
@@ -73,7 +82,7 @@ export default function ({ route, store }) {
 </script>
 ```
 
-##### Track manually (with document.title)
+##### Track manually with vue-router beforeRouterEnter guard
 ```js
 <template>
   <div>
@@ -84,23 +93,25 @@ export default function ({ route, store }) {
 <script>
 export default {
   matomo: false,
-  head: {
-    title: 'manually tracked'
+  head() {
+    return {
+      title: this.title
+    }
+  },
+  data() {
+    return {
+      title: 'manually tracked'
+    }
   },
   beforeRouteEnter(to, from, next) {
     next((vm) => {
-      /**
-       * No need to call setDocumentTitle here if matomo: false has been set
-       * above. This callback is called after the DOM update and matomo already
-       * uses document.title by default. If matomo: false has not been set, you
-       * have to call setDocumentTitle here to override the
-       * setDocumentTitle call in the plugin
-       */
+      vm.$matomo.setDocumentTitle(vm.title)
       vm.$matomo.trackPageView()
     })
   }
 }
 </script>
+
 ```
 
 ## Consent
@@ -109,9 +120,14 @@ The plugin extends the matomo tracker with a `setConsent(<consentGiven>)` conven
 
 When `setConsent()` is called, the plugin will automatically call rememberConsentGiven when the module option consentExpires has been set. To forget consent you can pass false to this method.
 
-See the [default layout](./test/fixture/layouts/default.vue) in the test fixture for how to use this method in combination with a Vuex store.
+See the [default layout](./test/fixtures/basic/layouts/default.vue) in the test fixture for how to use this method in combination with a Vuex store.
 
 ## Module Options
+
+#### `onMetaChange`
+
+- Default: `false`
+If true, page views will be tracked on the first vue-meta update after navigation occured. See caveats below for more information
 
 #### `siteId` (required)
 
@@ -164,8 +180,16 @@ If true, the plugin will log debug information to the console.
 - Default: `false`
 If true, the plugin will log every tracker function call to the console
 
-## Known issues
+## Caveats
 
-This plugin uses a VueRouter afterEach guard to track navigation. Because the DOM is only updated after all afterEach guard's have been called (see the [VueRouter docs](https://router.vuejs.org/en/advanced/navigation-guards.html)), we dont know the document.title for the new page. This plugin fallsback to setting the route.path as document title.
+### document.title
 
-If you really wish to track the document title, you can add a `beforeRouteEnter()` guard in your page components and pass a callback to the next method. See above or the [manually tracked](./test/fixture/pages/manuallytracked.vue) page for an example.
+Nuxt.js uses vue-meta to asynchronously update the `document.title`, this means by default we dont know when the document.title is changed. Therefore the default behaviour for this plugin is to set the `route.path` as document title.
+
+If you set the module option `onMetaChange: true`, then this plugin will track page views on the first time some meta data is updated by vue-meta. This makes sure the document.title is available and updated, but if you have multiple pages without any meta data then those page views will probably not be tracked.
+
+> vue-meta's changed event is only triggered when any meta data changed, make sure all your routes have a `head` option.
+
+When debug is true, this plugin will show warnings in the console when it detects pages without a title or when no vue-meta changed event is triggered after navigation (timeout for this 500ms)
+
+You can also use a combination of manual tracking and a vuex store to keep track of the document.title

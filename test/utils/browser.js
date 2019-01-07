@@ -24,9 +24,13 @@ export default class Browser {
     const page = await this.browser.newPage()
 
     // pass on console messages
+    const typeMap = {
+      debug: 'debug',
+      warning: 'warn'
+    }
     page.on('console', (msg) => {
-      if (['debug'].includes(msg.type())) {
-        console[msg.type()](msg.text()) // eslint-disable-line no-console
+      if (typeMap[msg.type()]) {
+        console[typeMap[msg.type()]](msg.text()) // eslint-disable-line no-console
       }
     })
 

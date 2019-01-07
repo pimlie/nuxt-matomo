@@ -1,4 +1,4 @@
-import { Nuxt, Builder } from '../utils'
+import { Nuxt, Builder } from '../../utils'
 
 describe('Build fixture', () => {
   let nuxt

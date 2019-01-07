@@ -1,18 +1,19 @@
 import { URL } from 'url'
-import { Nuxt, getPort, waitFor, waitUntil } from '../utils'
+import { Nuxt, getPort, waitFor, waitUntil, expectParams } from '../utils'
 import Browser from '../utils/browser'
 
 let port
 const browser = new Browser()
 const url = route => `http://localhost:${port}${route}`
 
-describe('Nuxt Matomo', () => {
+describe('matomo analytics', () => {
   let nuxt
   let page
   let matomoUrl = []
+  const createTrackerMsg = 'Created tracker for siteId 1 to ./piwik.php'
 
   beforeAll(async () => {
-    const config = require('../fixture/nuxt.config')
+    const config = require('../fixtures/basic/nuxt.config')
     nuxt = new Nuxt(config)
 
     port = await getPort()
@@ -20,6 +21,7 @@ describe('Nuxt Matomo', () => {
     await browser.start({})
 
     console.debug = jest.fn()
+    console.warn = jest.fn()
 
     nuxt.hook('render:route', (url, result, context) => {
       if (url.indexOf('piwik.php') > -1) {
@@ -39,17 +41,19 @@ describe('Nuxt Matomo', () => {
 
   test('matomo is triggered on page load', async () => {
     matomoUrl = []
-    const pageUrl = url('/')
-    page = await browser.page(pageUrl)
+    const pageUrl = '/'
+    page = await browser.page(url(pageUrl))
     await waitUntil(() => matomoUrl.length >= 1)
 
-    expect(console.debug).toHaveBeenCalledWith(expect.stringMatching('Created tracker for siteId 1 to ./piwik.php'))
+    expect(console.debug).toHaveBeenCalledWith(expect.stringMatching(createTrackerMsg))
     expect(console.debug).toHaveBeenCalledWith(expect.stringMatching(`to track pageview ${pageUrl}`))
 
     expect(await page.$text('h1')).toBe('index')
 
-    expect(matomoUrl[0].searchParams.get('idsite')).toBe('1')
-    expect(matomoUrl[0].searchParams.get('action_name')).toBe('/')
+    expectParams(matomoUrl[0].searchParams, {
+      idsite: '1',
+      action_name: pageUrl
+    })
   })
 
   test('cookies have been set', async () => {
@@ -61,114 +65,122 @@ describe('Nuxt Matomo', () => {
 
   test('matomo is triggered on navigation', async () => {
     matomoUrl = []
-    const pageUrl = url('/middleware')
-    await page.nuxt.navigate('/middleware')
+    const pageUrl = '/middleware'
+    await page.nuxt.navigate(pageUrl)
     await waitUntil(() => matomoUrl.length >= 1)
 
-    expect(console.debug).not.toHaveBeenCalledWith(expect.stringMatching('Created tracker for siteId 1 to ./piwik.php'))
+    expect(console.debug).not.toHaveBeenCalledWith(expect.stringMatching(createTrackerMsg))
     expect(console.debug).toHaveBeenCalledWith(expect.stringMatching(`to track pageview ${pageUrl}`))
 
     expect(await page.$text('h1')).toBe('middleware')
 
-    expect(matomoUrl[0].searchParams.get('idsite')).toBe('1')
-    expect(matomoUrl[0].searchParams.get('action_name')).toBe('/middleware')
+    expectParams(matomoUrl[0].searchParams, {
+      idsite: '1',
+      action_name: pageUrl
+    })
   })
 
   test('route.meta from global middleware is used', () => {
-    expect(matomoUrl[0].searchParams.get('cvar')).toBeTruthy()
-    const cvar = JSON.parse(matomoUrl[0].searchParams.get('cvar'))
-    expect(cvar['1']).toBeTruthy()
-    expect(cvar['1'][0]).toBe('VisitorType')
-    expect(cvar['1'][1]).toBe('A')
-    expect(cvar['2']).toBeTruthy()
-    expect(cvar['2'][0]).toBe('OtherType')
-    expect(cvar['2'][1]).toBe('true')
+    expectParams(matomoUrl[0].searchParams, {
+      cvar: [
+        ['VisitorType', 'A'],
+        ['OtherType', 'true']
+      ]
+    })
   })
 
   test('matomo prop defined in page component is used', async () => {
     matomoUrl = []
-    await page.nuxt.navigate('/component-prop')
+    const pageUrl = '/component-prop'
+    await page.nuxt.navigate(pageUrl)
     await waitUntil(() => matomoUrl.length >= 1)
 
     expect(await page.$text('h1')).toBe('component prop')
 
-    expect(matomoUrl[0].searchParams.get('idsite')).toBe('1')
-    expect(matomoUrl[0].searchParams.get('action_name')).toBe('/component-prop')
-
-    expect(matomoUrl[0].searchParams.get('cvar')).toBeTruthy()
-    const cvar = JSON.parse(matomoUrl[0].searchParams.get('cvar'))
-    expect(cvar['1']).toBeTruthy()
-    expect(cvar['1'][0]).toBe('VisitorType')
-    expect(cvar['1'][1]).toBe('B')
-    expect(cvar['2']).toBeTruthy()
-    expect(cvar['2'][0]).toBe('OtherType')
-    expect(cvar['2'][1]).toBe('true')
+    expectParams(matomoUrl[0].searchParams, {
+      idsite: '1',
+      action_name: pageUrl,
+      cvar: [
+        ['VisitorType', 'B'],
+        ['OtherType', 'true']
+      ]
+    })
   })
 
   test('matomo function defined in page component is used', async () => {
     matomoUrl = []
-    await page.nuxt.navigate('/component-fn')
+    const pageUrl = '/component-fn'
+    await page.nuxt.navigate(pageUrl)
     await waitUntil(() => matomoUrl.length >= 1)
 
     expect(await page.$text('h1')).toBe('component fn')
 
-    expect(matomoUrl[0].searchParams.get('idsite')).toBe('1')
-    expect(matomoUrl[0].searchParams.get('action_name')).toBe('/component-fn')
-
-    expect(matomoUrl[0].searchParams.get('cvar')).toBeTruthy()
-    const cvar = JSON.parse(matomoUrl[0].searchParams.get('cvar'))
-    expect(cvar['1']).toBeTruthy()
-    expect(cvar['1'][0]).toBe('VisitorType')
-    expect(cvar['1'][1]).toBe('C')
-    expect(cvar['2']).toBeTruthy()
-    expect(cvar['2'][0]).toBe('OtherType')
-    expect(cvar['2'][1]).toBe('true')
+    expectParams(matomoUrl[0].searchParams, {
+      idsite: '1',
+      action_name: pageUrl,
+      cvar: [
+        ['VisitorType', 'C'],
+        ['OtherType', 'true']
+      ]
+    })
   })
 
   test('tracker is injected and can be used', async () => {
     matomoUrl = []
-    const pageUrl = url('/injected')
-    page = await browser.page(pageUrl)
+    const pageUrl = '/injected'
+    await page.nuxt.navigate(pageUrl)
     await waitUntil(() => matomoUrl.length >= 2)
 
-    expect(console.debug).toHaveBeenCalledWith(expect.stringMatching('Created tracker for siteId 1 to ./piwik.php'))
+    expect(console.debug).not.toHaveBeenCalledWith(expect.stringMatching(createTrackerMsg))
     expect(console.debug).toHaveBeenCalledWith(expect.stringMatching(`to track pageview ${pageUrl}`))
 
     expect(await page.$text('h1')).toBe('injected')
 
-    expect(matomoUrl[0].searchParams.get('idsite')).toBe('1')
-    expect(matomoUrl[0].searchParams.get('action_name')).toBe('/injected')
+    expectParams(matomoUrl[0].searchParams, {
+      idsite: '1',
+      action_name: pageUrl,
+      cvar: [
+        ['VisitorType', 'C'],
+        ['OtherType', 'true']
+      ]
+    })
 
-    expect(matomoUrl[0].searchParams.get('cvar')).toBeFalsy()
-    expect(matomoUrl[1].searchParams.get('idsite')).toBe('1')
-    expect(matomoUrl[1].searchParams.get('download')).toBe('file')
+    expectParams(matomoUrl[1].searchParams, {
+      idsite: '1',
+      download: 'file'
+    })
   })
 
   test('can disable automatic tracking to track manually', async () => {
     matomoUrl = []
-    const pageUrl = url('/manuallytracked')
-    page = await browser.page(pageUrl)
+    const pageUrl = '/manuallytracked'
+    await page.nuxt.navigate(pageUrl)
     await waitUntil(() => matomoUrl.length >= 1)
     await waitFor(100) // wait a bit more
 
-    expect(console.debug).toHaveBeenCalledWith(expect.stringMatching('Created tracker for siteId 1 to ./piwik.php'))
+    expect(console.debug).not.toHaveBeenCalledWith(expect.stringMatching(createTrackerMsg))
     expect(console.debug).toHaveBeenCalledWith(expect.stringMatching(`wont track pageview ${pageUrl}`))
 
     expect(await page.$text('h1')).toBe('manually tracked')
 
     expect(matomoUrl.length).toBe(1)
-    expect(matomoUrl[0].searchParams.get('idsite')).toBe('1')
-    expect(matomoUrl[0].searchParams.get('action_name')).toBe('manually tracked')
-    expect(matomoUrl[0].searchParams.get('cvar')).toBeFalsy()
+    expectParams(matomoUrl[0].searchParams, {
+      idsite: '1',
+      action_name: 'manually tracked',
+      cvar: [
+        ['VisitorType', 'C'],
+        ['OtherType', 'true']
+      ]
+    })
   })
 
   test('does not track when consent is required', async () => {
     matomoUrl = []
-    const pageUrl = url('/consent')
-    page = await browser.page(pageUrl)
+    const pageUrl = '/consent'
+    await page.nuxt.navigate(pageUrl)
     await waitFor(250) // wait a bit
 
-    expect(console.debug).toHaveBeenCalledWith(expect.stringMatching('Created tracker for siteId 1 to ./piwik.php'))
+    expect(console.debug).not.toHaveBeenCalledWith(expect.stringMatching(createTrackerMsg))
     expect(console.debug).toHaveBeenCalledWith(expect.stringMatching(`to track pageview ${pageUrl}`))
 
     expect(await page.$text('h1')).toBe('consent')
@@ -177,8 +189,8 @@ describe('Nuxt Matomo', () => {
 
   test('still does not track when consent is required', async () => {
     matomoUrl = []
-    const pageUrl = url('/')
-    await page.nuxt.navigate('/')
+    const pageUrl = '/'
+    await page.nuxt.navigate(pageUrl)
     await waitFor(250) // wait a bit
 
     expect(console.debug).toHaveBeenCalledWith(expect.stringMatching(`to track pageview ${pageUrl}`))
@@ -198,8 +210,13 @@ describe('Nuxt Matomo', () => {
 
     expect(console.debug).not.toHaveBeenCalled()
 
-    expect(matomoUrl[0].searchParams.get('idsite')).toBe('1')
-    expect(matomoUrl[0].searchParams.get('action_name')).toBe('/')
-    expect(matomoUrl[0].searchParams.get('cvar')).toBeFalsy()
+    expectParams(matomoUrl[0].searchParams, {
+      idsite: '1',
+      action_name: '/',
+      cvar: [
+        ['VisitorType', 'A'],
+        ['OtherType', 'true']
+      ]
+    })
   })
 })
