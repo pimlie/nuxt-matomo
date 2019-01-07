@@ -184,9 +184,9 @@ If true, the plugin will log every tracker function call to the console
 
 ### document.title
 
-Nuxt.js uses vue-meta to asynchronously update the `document.title`, this means by default we dont know when the document.title is changed. Therefore the default behaviour for this plugin is to set the `route.path` as document title.
+Nuxt.js uses vue-meta to asynchronously update the `document.title`, this means by default we dont know when the `document.title` is changed. Therefore the default behaviour for this plugin is to set the `route.path` as document title.
 
-If you set the module option `onMetaChange: true`, then this plugin will track page views on the first time some meta data is updated by vue-meta (after navigation). This makes sure the `document.title` is available and updated, but if you have multiple pages without any meta data then those page views will probably not be tracked.
+If you set the module option `onMetaChange: true`, then this plugin will track page views on the first time some meta data is updated by vue-meta (after navigation). This makes sure the `document.title` is available and updated, but if you have multiple pages without any meta data then those page views **could not be tracked**
 
 > vue-meta's changed event is only triggered when any meta data changed, make sure all your routes have a [`head`](https://nuxtjs.org/api/pages-head) option.
 
