@@ -6,6 +6,14 @@
   "repository": "https://github.com/pimlie/nuxt-matomo",
   "homepage": "https://github.com/pimlie/nuxt-matomo",
   "main": "lib/module.js",
+  "keywords": [
+    "matomo",
+    "piwik",
+    "analytics",
+    "nuxt",
+    "nuxt.js",
+    "nuxtjs
+  ],
   "files": [
     "lib"
   ],
