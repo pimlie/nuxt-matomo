@@ -23,13 +23,11 @@ yarn add nuxt-matomo
 
 ## Usage
 
-### Setting configuration at runtime
+By default the document title and `route.fullPath` are tracked. You can add additional tracking info by adding a `route.meta.matomo` object in a middleware or by adding a matomo function or object to your page components.
 
-You can add additional tracking info by adding a `route.meta.matomo` object in a middleware or by adding a matomo function or object to your page components.
+The matomo javascript tracker is also injected as `$matomo` in the Nuxt.js context. Use this to e.g. manually track a page view. See the [injected](./test/fixtures/basic/pages/injected.vue) and [manually tracked](./test/fixtures/basic/pages/manuallytracked.vue) pages in the test fixture for an example
 
-> The VueRouter afterEach guard which this plugin uses is called before your page component is created
-
-The matomo javascript tracker is also injected as `$matomo` in your Nuxt instance to e.g. manually track a page view. See the [injected](./test/fixtures/basic/pages/injected.vue) and [manually tracked](./test/fixtures/basic/pages/manuallytracked.vue) pages in the test fixture for an example
+> See the official [Matomo JavaScript Tracking client docs](https://developer.matomo.org/api-reference/tracking-javascript) for a full overview of available methods
 
 ##### Middleware example
 ```js
