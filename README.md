@@ -56,17 +56,17 @@ export default function ({ route, store }) {
   export default {
     // the matomo function is bound to the Matomo tracker
     // (this function is called before the page component is initialized)
-    matomo (from, to, store) {
+    matomo(from, to, store) {
       this.setCustomVariable(1, 'VisitorType', 'Special Member')
     },
     // return false if you want to manually track here
-    matomo (from, to, store) {
+    matomo(from, to, store) {
       this.setDocumentTitle('my title')
       this.trackPageView()
       return false
     },
     // or let the function return an object
-    matomo (from, to, store) {
+    matomo(from, to, store) {
       // this object is merged with the object returned by a global middleware,
       // use the object key to override properties from the middleware
       return {
