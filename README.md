@@ -81,7 +81,7 @@ export default function ({ route, store }) {
 ```
 
 <details>
-<summary>##### Track manually with vue-router beforeRouterEnter guard</summary>
+<summary><h5>Track manually with vue-router beforeRouterEnter guard</h5></summary>
 
 This is overly complicated, you probably shouldnt use this
 
