@@ -29,7 +29,7 @@ The matomo javascript tracker is also injected as `$matomo` in the Nuxt.js conte
 
 > See the official [Matomo JavaScript Tracking client docs](https://developer.matomo.org/api-reference/tracking-javascript) for a full overview of available methods
 
-##### Middleware example
+#### Middleware example
 ```js
 export default function ({ route, store }) {
   route.meta.matomo = {
@@ -41,7 +41,7 @@ export default function ({ route, store }) {
 
 ```
 
-##### Page component example
+#### Page component example
 ```js
 <template>
   <div>
