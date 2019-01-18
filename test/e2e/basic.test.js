@@ -160,7 +160,7 @@ describe('matomo analytics', () => {
     await waitFor(100) // wait a bit more
 
     expect(console.debug).not.toHaveBeenCalledWith(expect.stringMatching(createTrackerMsg))
-    expect(console.debug).toHaveBeenCalledWith(expect.stringMatching(`wont track pageview ${pageUrl}`))
+    expect(console.debug).toHaveBeenCalledWith(expect.stringMatching(`wont \\(automatically\\) track pageview ${pageUrl}`))
 
     expect(await page.$text('h1')).toBe('manually tracked')
 
