@@ -23,7 +23,7 @@ yarn add nuxt-matomo
 
 ## Usage
 
-By default the document title and `route.fullPath` are tracked. You can add additional tracking info by adding a `route.meta.matomo` object in a middleware or by adding a matomo function or object to your page components.
+By default `route.fullPath` and the [#documenttitle](document title) are tracked. You can add additional tracking info by adding a `route.meta.matomo` object in a middleware or by adding a matomo function or object to your page components.
 
 The matomo javascript tracker is also injected as `$matomo` in the Nuxt.js context. Use this to e.g. manually track a page view. See the [injected](./test/fixtures/basic/pages/injected.vue) and [manually tracked](./test/fixtures/basic/pages/manuallytracked.vue) pages in the test fixture for an example
 
@@ -80,7 +80,11 @@ export default function ({ route, store }) {
 </script>
 ```
 
-##### Track manually with vue-router beforeRouterEnter guard
+<details>
+<summary>##### Track manually with vue-router beforeRouterEnter guard</summary>
+
+This is overly complicated, you probably shouldnt use this
+
 ```js
 <template>
   <div>
@@ -111,6 +115,7 @@ export default {
 </script>
 
 ```
+</details>
 
 ## Consent
 
