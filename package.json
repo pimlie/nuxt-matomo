@@ -1,6 +1,6 @@
 {
   "name": "nuxt-matomo",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "license": "MIT",
   "description": "Matomo analytics for Nuxt.js",
   "repository": "https://github.com/pimlie/nuxt-matomo",
