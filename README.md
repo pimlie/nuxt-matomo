@@ -29,6 +29,8 @@ The matomo javascript tracker is also injected as `$matomo` in the Nuxt.js conte
 
 > See the official [Matomo JavaScript Tracking client docs](https://developer.matomo.org/api-reference/tracking-javascript) for a full overview of available methods
 
+> :warning: If you need to support IE9 or IE10 and `blockLoading: false`, then you need to include a [ProxyPolyfill](https://github.com/GoogleChrome/proxy-polyfill) manually as [Babel](https://babeljs.io/docs/en/learn/#proxies) doesnt provide one
+
 #### Middleware example
 ```js
 export default function ({ route, store }) {
@@ -155,7 +157,8 @@ If true, page views will be tracked on the first vue-meta update after navigatio
 
 - Default: `false`
 
-If true, loading of the page is blocked until `window.Piwik` becomes available. If false, a [Proxy](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) is used to delay tracker calls until Piwik is available.
+If true, loading of the page is blocked until `window.Piwik` becomes available.
+If false, a [Proxy](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) is used to delay tracker calls until Piwik is available.
 
 > :warning: If you need to support IE9 or IE10 you need to include a [ProxyPolyfill](https://github.com/GoogleChrome/proxy-polyfill) manually as [Babel](https://babeljs.io/docs/en/learn/#proxies) doesnt provide one
 
