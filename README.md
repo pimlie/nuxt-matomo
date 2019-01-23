@@ -29,8 +29,6 @@ The matomo javascript tracker is also injected as `$matomo` in the Nuxt.js conte
 
 > :blue_book: See the official [Matomo JavaScript Tracking client docs](https://developer.matomo.org/api-reference/tracking-javascript) for a full overview of available methods
 
-> :information_source: If you dont need to support IE9 or IE10, its recommended to set `useProxyObject: true`
-
 #### Middleware example
 ```js
 export default function ({ route, store }) {
@@ -158,15 +156,15 @@ If true, page views will be tracked on the first vue-meta update after navigatio
 - Default: `false`
 
 If true, loading of the page is blocked until `window.Piwik` becomes available.
-If false, a [Proxy](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) is used to delay tracker calls until Piwik is available.
+If false, a proxy implementation is used to delay tracker calls until Piwik is available.
 
-#### `useProxyObject`
+#### `addNoProxyWorkaround`
 
-- Default: `false`
+- Default: `true`
 
-If true then a [`Proxy`}(https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) object is used to delay tracker calls until `window.Piwik` becomes available. If false then a manual list of Piwik API methods if used, see [./lib/api-methods-list.json](here)
+When `blockLoading: false` we have to wait until `window.Piwik` becomes available, if a browser supports a [`Proxy`}(https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) then we use this. Older browsers like IE9/IE10 dont support this, for these browsers a manual list of api methods to proxy is added when `addNoProxyWorkaround: true`. See the list here [./lib/api-methods-list.json](here)
 
-> :warning: If you set this to true and need to support IE9 or IE10 you need to include a [ProxyPolyfill](https://github.com/GoogleChrome/proxy-polyfill) manually as [Babel](https://babeljs.io/docs/en/learn/#proxies) doesnt provide one
+> :warning: If you set this to `false` and still need to support IE9 or IE10 you need to include a [ProxyPolyfill](https://github.com/GoogleChrome/proxy-polyfill) manually as [Babel](https://babeljs.io/docs/en/learn/#proxies) doesnt provide one
 
 #### `cookies`
 
