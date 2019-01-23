@@ -27,9 +27,9 @@ By default `route.fullPath` and the [document title](#documenttitle) are tracked
 
 The matomo javascript tracker is also injected as `$matomo` in the Nuxt.js context. Use this to e.g. manually track a page view. See the [injected](./test/fixtures/basic/pages/injected.vue) and [manually tracked](./test/fixtures/basic/pages/manuallytracked.vue) pages in the test fixture for an example
 
-> See the official [Matomo JavaScript Tracking client docs](https://developer.matomo.org/api-reference/tracking-javascript) for a full overview of available methods
+> :blue_book: See the official [Matomo JavaScript Tracking client docs](https://developer.matomo.org/api-reference/tracking-javascript) for a full overview of available methods
 
-> :warning: If you need to support IE9 or IE10 and `blockLoading: false`, then you need to include a [ProxyPolyfill](https://github.com/GoogleChrome/proxy-polyfill) manually as [Babel](https://babeljs.io/docs/en/learn/#proxies) doesnt provide one
+> :information_source: If you dont need to support IE9 or IE10, its recommended to set `useProxyObject: true`
 
 #### Middleware example
 ```js
@@ -160,7 +160,13 @@ If true, page views will be tracked on the first vue-meta update after navigatio
 If true, loading of the page is blocked until `window.Piwik` becomes available.
 If false, a [Proxy](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) is used to delay tracker calls until Piwik is available.
 
-> :warning: If you need to support IE9 or IE10 you need to include a [ProxyPolyfill](https://github.com/GoogleChrome/proxy-polyfill) manually as [Babel](https://babeljs.io/docs/en/learn/#proxies) doesnt provide one
+#### `useProxyObject`
+
+- Default: `false`
+
+If true then a [`Proxy`}(https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) object is used to delay tracker calls until `window.Piwik` becomes available. If false then a manual list of Piwik API methods if used, see [./lib/api-methods-list.json](here)
+
+> :warning: If you set this to true and need to support IE9 or IE10 you need to include a [ProxyPolyfill](https://github.com/GoogleChrome/proxy-polyfill) manually as [Babel](https://babeljs.io/docs/en/learn/#proxies) doesnt provide one
 
 #### `cookies`
 
