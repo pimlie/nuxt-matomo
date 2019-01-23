@@ -162,9 +162,9 @@ If false, a proxy implementation is used to delay tracker calls until Piwik is a
 
 - Default: `true`
 
-When `blockLoading: false` we have to wait until `window.Piwik` becomes available, if a browser supports a [`Proxy`}(https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) then we use this. Older browsers like IE9/IE10 dont support this, for these browsers a manual list of api methods to proxy is added when `addNoProxyWorkaround: true`. See the list here [./lib/api-methods-list.json](here)
+When `blockLoading: false` we have to wait until `window.Piwik` becomes available, if a browser supports a [`Proxy`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) then we use this. Older browsers like IE9/10 dont support this, for these browsers a manual list of api methods to proxy is added when `addNoProxyWorkaround: true`. See the list here [here](./lib/api-methods-list.json)
 
-> :warning: If you set this to `false` and still need to support IE9 or IE10 you need to include a [ProxyPolyfill](https://github.com/GoogleChrome/proxy-polyfill) manually as [Babel](https://babeljs.io/docs/en/learn/#proxies) doesnt provide one
+> :warning: If you set this to `false` and still need to support IE9/10 you need to include a [ProxyPolyfill](https://github.com/GoogleChrome/proxy-polyfill) manually as [Babel](https://babeljs.io/docs/en/learn/#proxies) doesnt provide one
 
 #### `cookies`
 
