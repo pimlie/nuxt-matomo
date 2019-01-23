@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>middleware</h1>
-    <router-link :to="'/'">home</router-link>
+    <nuxt-link :to="'/'">home</nuxt-link>
   </div>
 </template>
 

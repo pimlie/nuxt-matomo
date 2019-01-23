@@ -2,9 +2,9 @@
   <div>
     <h1>index</h1>
 
-    <router-link to="middleware">middleware</router-link><br>
-    <router-link to="headfn">headfn</router-link><br>
-    <router-link to="manuallytracked">manually tracked</router-link><br>
-    <router-link to="injected">injected</router-link><br>
+    <nuxt-link :to="'/middleware'">middleware</nuxt-link><br>
+    <nuxt-link :to="'/headfn'">headfn</nuxt-link><br>
+    <nuxt-link :to="'/manuallytracked'">manually tracked</nuxt-link><br>
+    <nuxt-link :to="'/injected'">injected</nuxt-link><br>
   </div>
 </template>

@@ -127,11 +127,6 @@ See the [basic fixture](./test/fixtures/basic) for an example how to use this me
 
 ## Module Options
 
-#### `onMetaChange`
-
-- Default: `false`
-If true, page views will be tracked on the first vue-meta update after navigation occured. See caveats below for more information
-
 #### `siteId` (required)
 
 The matomo siteId
@@ -150,6 +145,19 @@ Url to piwik.php
 
 - Default: `matomoUrl + 'piwik.js'`
 Url to piwik.js
+
+#### `onMetaChange`
+
+- Default: `false`
+If true, page views will be tracked on the first vue-meta update after navigation occured. See caveats below for more information
+
+#### `blockLoading`
+
+- Default: `false`
+
+If true, loading of the page is blocked until `window.Piwik` becomes available. If false, a [Proxy](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) is used to delay tracker calls until Piwik is available.
+
+> :warn: If you need to support IE9 or IE10 you need to include a [ProxyPolyfill](https://github.com/GoogleChrome/proxy-polyfill) manually as [Babel](https://babeljs.io/docs/en/learn/#proxies) doesnt provide one
 
 #### `cookies`
 

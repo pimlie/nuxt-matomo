@@ -10,5 +10,19 @@ module.exports = {
       siteId: 1,
       matomoUrl: './'
     }]
-  ]
+  ],
+  matomoLoadDelay: 5000,
+  hooks: {
+    render: {
+      before: (server, render) => {
+        server.app.use((req, res, next) => {
+          if (server.options.matomoLoadDelay && req.originalUrl.endsWith('piwik.js')) {
+            setTimeout(next, server.options.matomoLoadDelay)
+          } else {
+            next()
+          }
+        })
+      }
+    }
+  }
 }
