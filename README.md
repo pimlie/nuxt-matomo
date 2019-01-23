@@ -157,7 +157,7 @@ If true, page views will be tracked on the first vue-meta update after navigatio
 
 If true, loading of the page is blocked until `window.Piwik` becomes available. If false, a [Proxy](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) is used to delay tracker calls until Piwik is available.
 
-> :warn: If you need to support IE9 or IE10 you need to include a [ProxyPolyfill](https://github.com/GoogleChrome/proxy-polyfill) manually as [Babel](https://babeljs.io/docs/en/learn/#proxies) doesnt provide one
+> :warning: If you need to support IE9 or IE10 you need to include a [ProxyPolyfill](https://github.com/GoogleChrome/proxy-polyfill) manually as [Babel](https://babeljs.io/docs/en/learn/#proxies) doesnt provide one
 
 #### `cookies`
 
