@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.2.1"></a>
+## [1.2.1](https://github.com/pimlie/nuxt-matomo/compare/v1.2.0...v1.2.1) (2019-01-24)
+
+
+### Bug Fixes
+
+* loop api methods array in plugin, not template ([d443247](https://github.com/pimlie/nuxt-matomo/commit/d443247))
+* unset correct var ([ee2d612](https://github.com/pimlie/nuxt-matomo/commit/ee2d612))
+
+
+
 <a name="1.2.0"></a>
 # [1.2.0](https://github.com/pimlie/nuxt-matomo/compare/v1.1.1...v1.2.0) (2019-01-23)
 
