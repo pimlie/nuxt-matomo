@@ -1,6 +1,9 @@
 module.exports = {
   rootDir: __dirname,
   dev: false,
+  router: {
+    base: '/app/'
+  },
   modules: [
     ['@/../../../', {
       onMetaChange: true,

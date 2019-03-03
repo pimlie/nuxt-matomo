@@ -4,5 +4,5 @@ module.exports = {
   'collectCoverage': false,
   'collectCoverageFrom': ['lib'],
 
-  'setupTestFrameworkScriptFile': './test/utils/setup'
+  'setupFilesAfterEnv': ['./test/utils/setup']
 }

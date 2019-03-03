@@ -4,7 +4,7 @@ import Browser from '../utils/browser'
 
 let port
 const browser = new Browser()
-const url = route => `http://localhost:${port}${route}`
+const url = route => `http://localhost:${port}/app${route}`
 
 describe('matomo analytics', () => {
   let nuxt
@@ -42,19 +42,22 @@ describe('matomo analytics', () => {
 
   test('matomo is triggered on page load', async () => {
     matomoUrl = []
-    const pageUrl = '/page1'
-    page = await browser.page(url(pageUrl))
+    const pagePath = '/page1'
+    const pageUrl = url(pagePath)
+    page = await browser.page(pageUrl)
     await waitUntil(() => matomoUrl.length >= 1)
+
     expect(matomoUrl.length).toBe(1)
 
     expect(console.debug).toHaveBeenCalledWith(expect.stringMatching(createTrackerMsg))
-    expect(console.debug).toHaveBeenCalledWith(expect.stringMatching(`to track pageview ${pageUrl}`))
+    expect(console.debug).toHaveBeenCalledWith(expect.stringMatching(`to track pageview ${pagePath}`))
 
     expect(await page.$text('h1')).toBe('page1')
 
     expectParams(matomoUrl[0].searchParams, {
       idsite: '2',
-      action_name: 'page1'
+      action_name: 'page1',
+      url: `${pageUrl}`
     })
   })
 
