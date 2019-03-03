@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.2](https://github.com/pimlie/nuxt-matomo/compare/v1.2.1...v1.2.2) (2019-03-03)
+
+
+### Features
+
+* add router.base on tracking page url ([df414aa](https://github.com/pimlie/nuxt-matomo/commit/df414aa))
+
+
+
 <a name="1.2.1"></a>
 ## [1.2.1](https://github.com/pimlie/nuxt-matomo/compare/v1.2.0...v1.2.1) (2019-01-24)
 
