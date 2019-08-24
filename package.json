@@ -28,7 +28,7 @@
     "test:fixtures": "jest test/fixtures",
     "test:e2e": "jest test/e2e",
     "download-matomo": "wget -O test/utils/piwik.js https://raw.githubusercontent.com/matomo-org/matomo/master/js/piwik.js",
-    "create-matomo-api-list": "yarn download-matomo && node ./bin/createApiMethodsList.js"
+    "create-matomo-api-list": "yarn download-matomo && node ./scripts/createApiMethodsList.js"
   },
   "publishConfig": {
     "access": "public"
