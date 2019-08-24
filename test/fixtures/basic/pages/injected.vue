@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  mounted() {
+  mounted () {
     this.$matomo.trackLink('file', 'download')
   }
 }

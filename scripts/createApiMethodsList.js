@@ -5,7 +5,7 @@ const path = require('path')
 const { JSDOM, ResourceLoader } = require('jsdom')
 
 class MatomoResourceLoader extends ResourceLoader {
-  fetch(url, options) {
+  fetch (url, options) {
     // Override the contents of this script to do something unusual.
     if (url.endsWith('piwik.js')) {
       return Promise.resolve(Buffer.from(fs.readFileSync(path.resolve(__dirname, '../test/utils/piwik.js'), 'utf8')))

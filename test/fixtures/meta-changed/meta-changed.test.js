@@ -12,7 +12,8 @@ describe('Build fixture', () => {
     buildDone = jest.fn()
 
     nuxt.hook('build:done', buildDone)
-    builder = await new Builder(nuxt).build()
+    builder = new Builder(nuxt)
+    await builder.build()
   })
 
   test('correct build status', () => {

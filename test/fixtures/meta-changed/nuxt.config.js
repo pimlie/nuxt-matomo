@@ -4,6 +4,9 @@ module.exports = {
   router: {
     base: '/app/'
   },
+  build: {
+    terser: false
+  },
   modules: [
     ['@/../../../', {
       onMetaChange: true,

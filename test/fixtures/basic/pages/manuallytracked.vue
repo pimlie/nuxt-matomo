@@ -8,17 +8,17 @@
 <script>
 export default {
   matomo: false,
-  head() {
+  head () {
     return {
       title: this.title
     }
   },
-  data() {
+  data () {
     return {
       title: 'manually tracked'
     }
   },
-  beforeRouteEnter(to, from, next) {
+  beforeRouteEnter (to, from, next) {
     next((vm) => {
       vm.$matomo.setDocumentTitle(vm.title)
       vm.$matomo.trackPageView()

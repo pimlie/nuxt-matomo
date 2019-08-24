@@ -3,13 +3,13 @@ export { Nuxt, Builder } from 'nuxt'
 
 export { isFn, waitFor, waitUntil } from '../../lib/utils'
 
-export function expectParams(received, expectedParams) {
+export function expectParams (received, expectedParams) {
   if (!expectedParams) {
     expect(received).toBeFalsy()
   } else {
     expect(received).toBeTruthy()
 
-    for (const key in expectedParams) {
+    for (const key in expectedParams) { // eslint-disable-line no-unused-vars
       if (key === 'cvar') {
         expectCvars(received.get(key), expectedParams[key])
       } else {
@@ -19,7 +19,7 @@ export function expectParams(received, expectedParams) {
   }
 }
 
-export function expectCvars(received, expectedCvars) {
+export function expectCvars (received, expectedCvars) {
   if (!expectedCvars) {
     expect(received).toBeFalsy()
   } else {
@@ -27,7 +27,7 @@ export function expectCvars(received, expectedCvars) {
 
     const cvars = JSON.parse(received)
 
-    for (const key in expectedCvars) {
+    for (const key in expectedCvars) { // eslint-disable-line no-unused-vars
       const expectedCvar = expectedCvars[key]
       const cvar = cvars[`${parseInt(key) + 1}`]
 

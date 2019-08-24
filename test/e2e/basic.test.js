@@ -24,7 +24,7 @@ describe('matomo analytics', () => {
     console.warn = jest.fn()
 
     nuxt.hook('render:route', (url, result, context) => {
-      if (url.indexOf('piwik.php') > -1) {
+      if (url.includes('piwik.php')) {
         matomoUrl.push(new URL(url, `http://localhost:${port}`))
       }
     })

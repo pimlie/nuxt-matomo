@@ -6,10 +6,10 @@
 
 <script>
 export default {
-  matomo() {
+  matomo () {
     this.requireConsent()
   },
-  mounted() {
+  mounted () {
     /* setTimeout(() => {
       this.$store.commit('matomo/consented')
     }, 1000)/**/

@@ -4,10 +4,10 @@ export const state = () => ({
 })
 
 export const mutations = {
-  cookies(state, noCookies) {
+  cookies (state, noCookies) {
     state.cookies = !noCookies
   },
-  consented(state, noConsent) {
+  consented (state, noConsent) {
     state.consented = !noConsent
   }
 }

@@ -24,7 +24,7 @@ describe('matomo analytics', () => {
     console.warn = jest.fn()
 
     nuxt.hook('render:route', (url, result, context) => {
-      if (url.indexOf('piwik.php') > -1) {
+      if (url.includes('piwik.php')) {
         matomoUrl.push(new URL(url, `http://localhost:${port}`))
       }
     })
@@ -38,10 +38,10 @@ describe('matomo analytics', () => {
   afterEach(() => {
     console.debug.mockClear()
     console.warn.mockClear()
+    matomoUrl = []
   })
 
   test('matomo is triggered on page load', async () => {
-    matomoUrl = []
     const pagePath = '/page1'
     const pageUrl = url(pagePath)
     page = await browser.page(pageUrl)
@@ -62,7 +62,6 @@ describe('matomo analytics', () => {
   })
 
   test('matomo is triggered on navigation', async () => {
-    matomoUrl = []
     const pageUrl = '/page2'
     await page.nuxt.navigate(pageUrl)
     await waitUntil(() => matomoUrl.length >= 1)
@@ -80,7 +79,6 @@ describe('matomo analytics', () => {
   })
 
   test('warns on empty title', async () => {
-    matomoUrl = []
     const pageUrl = '/notitle'
     await page.nuxt.navigate(pageUrl)
     await waitUntil(() => matomoUrl.length >= 1)
@@ -98,9 +96,20 @@ describe('matomo analytics', () => {
     })
   })
 
-  test('warns on meta changed timeout (in debug)', async () => {
-    matomoUrl = []
-    const pageUrl = '/noupdate'
+  test('warns on meta changed timeout (in debug, test setup)', async () => {
+    const pageUrl = '/noupdate1'
+    await page.nuxt.navigate(pageUrl)
+    await waitUntil(() => matomoUrl.length >= 1)
+    expect(matomoUrl.length).toBe(1)
+
+    expect(console.debug).not.toHaveBeenCalledWith(expect.stringMatching(createTrackerMsg))
+    expect(console.debug).toHaveBeenCalledWith(expect.stringMatching(`to track pageview ${pageUrl}`))
+
+    expect(await page.$text('h1')).toBe('noupdate1')
+  })
+
+  test('warns on meta changed timeout (in debug, the test)', async () => {
+    const pageUrl = '/noupdate2'
     await page.nuxt.navigate(pageUrl)
     await waitUntil(() => matomoUrl.length >= 1, 2000)
     expect(matomoUrl.length).toBe(0)
@@ -109,6 +118,6 @@ describe('matomo analytics', () => {
     expect(console.debug).not.toHaveBeenCalledWith(expect.stringMatching(`to track pageview ${pageUrl}`))
     expect(console.warn).toHaveBeenCalledWith(expect.stringMatching(`changed event was not triggered for ${pageUrl}`))
 
-    expect(await page.$text('h1')).toBe('noupdate')
+    expect(await page.$text('h1')).toBe('noupdate2')
   })
 })

@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  matomo(from, to, store) {
+  matomo (from, to, store) {
     return {
       someVar: ['setCustomVariable', 1, 'VisitorType', 'C', 'page']
     }

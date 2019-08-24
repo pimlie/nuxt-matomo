@@ -12,6 +12,9 @@ module.exports = {
     }]
   ],
   matomoLoadDelay: 5000,
+  build: {
+    terser: false
+  },
   hooks: {
     render: {
       before: (server, render) => {

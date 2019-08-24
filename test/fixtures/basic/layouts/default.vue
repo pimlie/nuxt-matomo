@@ -5,12 +5,12 @@
 <script>
 export default {
   computed: {
-    consented() {
+    consented () {
       return this.$store.state.matomo.consented
     }
   },
   watch: {
-    consented(val) {
+    consented (val) {
       this.$matomo.setConsent(val)
     }
   }
