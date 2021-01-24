@@ -56,5 +56,8 @@
     "nuxt": "^2.9.1",
     "puppeteer": "^1.19.0",
     "standard-version": "^7.0.0"
+  },
+  "dependencies": {
+    "@nuxt/ufo": "^0.5.4"
   }
 }

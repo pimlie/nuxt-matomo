@@ -186,6 +186,11 @@ If greater than 0 and when the `tracker.setConsent` method is called then we cal
 - Default: `false`
 If true, dont track users who have set Mozilla's (proposed) Do Not Track setting
 
+#### `trailingSlash`
+
+- Default: `undefined`
+If true, ensure urls tracked in matomo end with a trailing slash. If false, strip trailing slash. Ignore if not set explicitly.
+
 #### `debug`
 
 - Default: `false`
