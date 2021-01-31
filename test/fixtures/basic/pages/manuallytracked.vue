@@ -8,21 +8,21 @@
 <script>
 export default {
   matomo: false,
-  head () {
-    return {
-      title: this.title
-    }
+  beforeRouteEnter (to, from, next) {
+    next((vm) => {
+      vm.$matomo.setDocumentTitle(vm.title)
+      vm.$matomo.trackPageView()
+    })
   },
   data () {
     return {
       title: 'manually tracked'
     }
   },
-  beforeRouteEnter (to, from, next) {
-    next((vm) => {
-      vm.$matomo.setDocumentTitle(vm.title)
-      vm.$matomo.trackPageView()
-    })
+  head () {
+    return {
+      title: this.title
+    }
   }
 }
 </script>

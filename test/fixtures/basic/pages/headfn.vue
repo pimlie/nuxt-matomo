@@ -7,15 +7,15 @@
 
 <script>
 export default {
+  data () {
+    return {
+      title: 'headfn'
+    }
+  },
   head () {
     // this wont work, this is unavaible when called from afterEach guard
     return {
       title: this.title
-    }
-  },
-  data () {
-    return {
-      title: 'headfn'
     }
   }
 }

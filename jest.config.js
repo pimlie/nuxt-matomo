@@ -1,8 +1,8 @@
 module.exports = {
-  'testEnvironment': 'node',
+  testEnvironment: 'node',
 
-  'collectCoverage': false,
-  'collectCoverageFrom': ['lib'],
+  collectCoverage: false,
+  collectCoverageFrom: ['lib'],
 
-  'setupFilesAfterEnv': ['./test/utils/setup']
+  setupFilesAfterEnv: ['./test/utils/setup']
 }

@@ -1,11 +1,11 @@
 module.exports = {
-  "root": true,
-  "parserOptions": {
-    "parser": "babel-eslint",
-    "sourceType": "module"
+  root: true,
+  parserOptions: {
+    parser: 'babel-eslint',
+    sourceType: 'module'
   },
-  "extends": [
-    "@nuxtjs"
+  extends: [
+    '@nuxtjs'
   ],
   rules: {
     'vue/singleline-html-element-content-newline': 'off',

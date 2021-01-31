@@ -15,11 +15,11 @@ class MatomoResourceLoader extends ResourceLoader {
   }
 }
 
-const { window } = new JSDOM(`<!DOCTYPE html><html><head><script src="piwik.js"></script></head></html>`, {
+const { window } = new JSDOM('<!DOCTYPE html><html><head><script src="piwik.js"></script></head></html>', {
   pretendToBeVisual: true,
   runScripts: 'dangerously',
   resources: new MatomoResourceLoader(),
-  virtualConsole: new VirtualConsole().sendTo(console),
+  virtualConsole: new VirtualConsole().sendTo(console)
 })
 
 window.document.addEventListener('DOMContentLoaded', () => {
