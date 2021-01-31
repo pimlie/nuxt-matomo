@@ -2,7 +2,7 @@
 
 const fs = require('fs')
 const path = require('path')
-const { JSDOM, ResourceLoader } = require('jsdom')
+const { JSDOM, ResourceLoader, VirtualConsole } = require('jsdom')
 
 class MatomoResourceLoader extends ResourceLoader {
   fetch (url, options) {
@@ -15,12 +15,14 @@ class MatomoResourceLoader extends ResourceLoader {
   }
 }
 
-const window = new JSDOM(`<!DOCTYPE html><script src="piwik.js"></script>`, {
+const { window } = new JSDOM(`<!DOCTYPE html><html><head><script src="piwik.js"></script></head></html>`, {
+  pretendToBeVisual: true,
   runScripts: 'dangerously',
-  resources: new MatomoResourceLoader()
-}).window
+  resources: new MatomoResourceLoader(),
+  virtualConsole: new VirtualConsole().sendTo(console),
+})
 
-setTimeout(() => {
+window.document.addEventListener('DOMContentLoaded', () => {
   const tracker = window.Piwik.getTracker('', 1)
 
   const fns = []
@@ -31,4 +33,4 @@ setTimeout(() => {
   })
 
   fs.writeFileSync(path.resolve(__dirname, '../lib/api-methods-list.json'), JSON.stringify(fns, null, 2))
-}, 1000)
+})
