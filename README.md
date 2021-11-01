@@ -1,5 +1,5 @@
 # Matomo analytics for Nuxt.js
-<a href="https://travis-ci.org/pimlie/nuxt-matomo"><img src="https://api.travis-ci.org/pimlie/nuxt-matomo.svg" alt="Build Status"></a>
+[![CI - Build](https://github.com/pimlie/nuxt-matomo/actions/workflows/ci.yml/badge.svg)](https://github.com/pimlie/nuxt-matomo/actions/workflows/ci.yml)
 [![npm](https://img.shields.io/npm/dt/nuxt-matomo.svg?style=flat-square)](https://www.npmjs.com/package/nuxt-matomo)
 [![npm (scoped with tag)](https://img.shields.io/npm/v/nuxt-matomo/latest.svg?style=flat-square)](https://www.npmjs.com/package/nuxt-matomo)
 

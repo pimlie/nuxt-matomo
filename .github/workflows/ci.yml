@@ -1,0 +1,39 @@
+---
+name: CI
+
+on:
+  push:
+    branches:
+    - master
+  pull_request:
+    branches:
+    - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      CI: true
+    strategy:
+      matrix:
+        node-version: [10.x, 12.x, 14.x, 16.x]
+    name: Use Node.js ${{ matrix.node-version }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'yarn'
+      - name: yarn install
+        run: yarn
+      - name: Updating browser list
+        run: npx browserslist@latest --update-db
+      - name: Linting Lib
+        run: yarn lint:lib
+      - name: Test fixture
+        run: yarn test:fixtures
+      - name: Lint Matomo
+        run: yarn lint:matomo
+      - name: e2e Tests
+        run: yarn test:e2e
