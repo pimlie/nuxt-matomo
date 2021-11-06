@@ -1,5 +1,5 @@
 # Matomo analytics for Nuxt.js
-[![CI - Build](https://github.com/pimlie/nuxt-matomo/actions/workflows/ci.yml/badge.svg)](https://github.com/pimlie/nuxt-matomo/actions/workflows/ci.yml)
+[![CI - Build](https://github.com/tkalmar/nuxt-matomo/actions/workflows/ci.yml/badge.svg)](https://github.com/tkalmar/nuxt-matomo/actions/workflows/ci.yml)
 [![npm](https://img.shields.io/npm/dt/nuxt-matomo.svg?style=flat-square)](https://www.npmjs.com/package/nuxt-matomo)
 [![npm (scoped with tag)](https://img.shields.io/npm/v/nuxt-matomo/latest.svg?style=flat-square)](https://www.npmjs.com/package/nuxt-matomo)
 
