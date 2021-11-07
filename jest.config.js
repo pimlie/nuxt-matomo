@@ -4,5 +4,8 @@ module.exports = {
   collectCoverage: false,
   collectCoverageFrom: ['lib'],
 
-  setupFilesAfterEnv: ['./test/utils/setup']
+  setupFilesAfterEnv: ['./test/utils/setup'],
+  transformIgnorePatterns: [
+    'node_modules/(?!(get-port)/)'
+  ]
 }
