@@ -4,6 +4,7 @@
 
 <script>
 export default {
+  name: 'DefaultLayout',
   computed: {
     consented () {
       return this.$store.state.matomo.consented

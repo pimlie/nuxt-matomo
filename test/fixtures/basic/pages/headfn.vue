@@ -7,6 +7,7 @@
 
 <script>
 export default {
+  name: 'HeadFnPage',
   data () {
     return {
       title: 'headfn'

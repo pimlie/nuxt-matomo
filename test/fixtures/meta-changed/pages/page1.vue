@@ -7,6 +7,7 @@
 
 <script>
 export default {
+  name: 'PageOne',
   head: {
     title: 'page1'
   }

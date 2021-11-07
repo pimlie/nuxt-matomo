@@ -7,6 +7,7 @@
 
 <script>
 export default {
+  name: 'MiddlewarePage',
   head: {
     title: 'middleware'
   }

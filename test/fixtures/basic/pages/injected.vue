@@ -7,6 +7,7 @@
 
 <script>
 export default {
+  name: 'InjectedPage',
   mounted () {
     this.$matomo.trackLink('file', 'download')
   }

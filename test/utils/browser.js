@@ -6,7 +6,7 @@ export default class Browser {
     this.browser = await puppeteer.launch(
       Object.assign(
         {
-          args: ['--no-sandbox', '--disable-setuid-sandbox'],
+          args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-gpu'],
           executablePath: process.env.PUPPETEER_EXECUTABLE_PATH
         },
         options
