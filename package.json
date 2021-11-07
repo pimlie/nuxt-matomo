@@ -54,5 +54,6 @@
     "puppeteer": "11.0.0",
     "standard": "^16.0.4",
     "standard-version": "9.3.2"
-  }
+  },
+  "dependencies": {}
 }

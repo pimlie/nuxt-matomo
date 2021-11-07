@@ -7,6 +7,7 @@
 
 <script>
 export default {
+  name: 'ManuallyTrackedPage',
   matomo: false,
   beforeRouteEnter (to, from, next) {
     next((vm) => {

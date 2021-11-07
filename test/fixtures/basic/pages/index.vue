@@ -8,3 +8,8 @@
     <nuxt-link :to="'/injected'">injected</nuxt-link><br>
   </div>
 </template>
+<script>
+export default {
+  name: 'IndexPage'
+}
+</script>

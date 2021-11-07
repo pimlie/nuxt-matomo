@@ -6,6 +6,7 @@
 
 <script>
 export default {
+  name: 'RequireConsent',
   matomo () {
     this.requireConsent()
   },
