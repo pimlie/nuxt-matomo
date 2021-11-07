@@ -1,6 +1,7 @@
 import { URL } from 'url'
 import { Nuxt } from 'nuxt'
-import { getPort, waitUntil, expectParams } from '../utils'
+import getPort from 'get-port'
+import { waitUntil, expectParams } from '../utils'
 import Browser from '../utils/browser'
 
 let port

@@ -1,5 +1,3 @@
-export { default as getPort } from 'get-port'
-
 export { isFn, waitFor, waitUntil } from '../../lib/utils'
 
 export function expectParams (received, expectedParams) {
