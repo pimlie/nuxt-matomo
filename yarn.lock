@@ -9894,7 +9894,7 @@ standard-version@9.3.2:
     stringify-package "^1.0.1"
     yargs "^16.0.0"
 
-standard@^16.0.4:
+standard@16.0.4:
   version "16.0.4"
   resolved "https://registry.yarnpkg.com/standard/-/standard-16.0.4.tgz#779113ba41dd218ab545e7b4eb2405561f6eb370"
   integrity sha512-2AGI874RNClW4xUdM+bg1LRXVlYLzTNEkHmTG5mhyn45OhbgwA+6znowkOGYy+WMb5HRyELvtNy39kcdMQMcYQ==

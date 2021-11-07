@@ -52,7 +52,7 @@
     "jsdom": "18.0.1",
     "nuxt": "2.15.8",
     "puppeteer": "11.0.0",
-    "standard": "^16.0.4",
+    "standard": "16.0.4",
     "standard-version": "9.3.2"
   },
   "dependencies": {}
