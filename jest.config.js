@@ -6,6 +6,6 @@ module.exports = {
 
   setupFilesAfterEnv: ['./test/utils/setup'],
   transformIgnorePatterns: [
-    'node_modules/(?!(get-port)/)'
+    '<rootDir>/node_modules/(?!(get-port)/)'
   ]
 }
