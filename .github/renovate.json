@@ -3,5 +3,11 @@
     "config:base",
     "npm:unpublishSafe",
     ":rebaseStalePrs"
+  ],
+  "packageRules": [
+    {
+      "matchPackagePatterns": ["^get-port"],
+      "allowedVersions": "<6"
+    }
   ]
 }
