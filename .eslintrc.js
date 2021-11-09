@@ -2,11 +2,17 @@ module.exports = {
   root: true,
   parserOptions: {
     parser: '@babel/eslint-parser',
-    sourceType: 'module',
     requireConfigFile: false
   },
+  overrides: [
+    {
+      files: ['*.json'],
+      parser: 'jsonc-eslint-parser'
+    }
+  ],
   extends: [
-    '@nuxtjs'
+    '@nuxtjs',
+    'plugin:jsonc/recommended-with-json'
   ],
   plugins: [
     'jest'

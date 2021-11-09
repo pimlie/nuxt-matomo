@@ -16,6 +16,7 @@ class MatomoResourceLoader extends ResourceLoader {
 }
 
 const { window } = new JSDOM('<!DOCTYPE html><html><head><script src="piwik.js"></script></head></html>', {
+  url: 'https://example.org/',
   pretendToBeVisual: true,
   runScripts: 'dangerously',
   resources: new MatomoResourceLoader(),
@@ -24,7 +25,6 @@ const { window } = new JSDOM('<!DOCTYPE html><html><head><script src="piwik.js">
 
 window.document.addEventListener('DOMContentLoaded', () => {
   const tracker = window.Piwik.getTracker('', 1)
-
   const fns = []
   Object.keys(tracker).forEach((fn) => {
     if (typeof tracker[fn] === 'function') {
@@ -32,5 +32,5 @@ window.document.addEventListener('DOMContentLoaded', () => {
     }
   })
 
-  fs.writeFileSync(path.resolve(__dirname, '../lib/api-methods-list.json'), JSON.stringify(fns, null, 2))
+  fs.writeFileSync(path.resolve(__dirname, '../lib/api-methods-list.json'), `${JSON.stringify(fns, null, 2)}\n`)
 })
